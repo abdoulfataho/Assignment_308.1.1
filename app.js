@@ -43,3 +43,46 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
   ((n1 % 2) + (n2 % 2) + (n3 % 2) + (n4 % 2) >= 2) && 
   !(n1 > 25 || n2 > 25 || n3 > 25 || n4 > 25) && 
   (n1 != n2 && n1 != n3 && n1 != n4 && n2 != n3 && n2 != n4 && n3 != n4);
+
+
+
+
+  // Part two :practical math.
+
+
+  // Declaring a fonction to check the fuel consumption depanding on wich speed we are
+  function fuelConsumption(speed) {
+    if (speed === 55) return 30;
+    else if (speed === 60) return 28;
+    else if (speed === 75) return 23;
+}
+// Declaring a fonction that will taake the trip details
+function tripDetails(speed) {
+    const totalDistance = 1500;
+    const fuelEfficiency = fuelConsumption(speed);
+    const fuelNeeded = totalDistance / fuelEfficiency;
+    const costPerGallon = 3;
+    const totalCost = fuelNeeded * costPerGallon;
+    const tripDuration = totalDistance / speed;
+    return { fuelNeeded, totalCost, tripDuration };
+}
+
+function compareResults() {
+    const budget = 175;
+    const speeds = [55, 60, 75];
+    speeds.forEach(speed => {
+        const { fuelNeeded, totalCost, tripDuration } = tripDetails(speed);
+        console.log(`At ${speed} mph:`);
+        console.log(`Gallons of fuel needed: ${fuelNeeded}`);
+        console.log(`Total cost of fuel: $${totalCost}`);
+        console.log(`Trip duration: ${tripDuration.toFixed(2)} hours`);
+        if (totalCost <= budget) {
+            console.log("Budget is enough to cover the fuel expense.");
+        } else {
+            console.log("Budget is not enough to cover the fuel expense.");
+        }
+        console.log();
+    });
+}
+
+compareResults();
